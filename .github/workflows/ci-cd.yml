@@ -102,7 +102,7 @@ jobs:
 
       - name: Build and Run Nginx Docker Container
         run: |
-          docker build -t mobile-app-demo .
-          docker stop mobile-demo 2>$null
-          docker rm mobile-demo 2>$null
-          docker run -d --name mobile-demo -p 8081:80 mobile-app-demo
+         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" build -t mobile-app-demo .
+         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" stop mobile-demo 2>$null
+         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" rm mobile-demo 2>$null
+         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" run -d --name mobile-demo -p 8081:80 mobile-app-demo
