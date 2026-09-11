@@ -89,7 +89,6 @@ jobs:
           name: mobile-app-debug
           path: build/app/outputs/flutter-apk/app-debug.apk
 
-
   auto_deploy:
     needs: auto_qa
     runs-on: self-hosted
@@ -100,9 +99,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # --------------------------------------------------
+      # Download Artifact for Docker Context
+      # --------------------------------------------------
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mobile-app-debug
+          path: build/app/outputs/flutter-apk/
+
       - name: Build and Run Nginx Docker Container
         run: |
-         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" build -t mobile-app-demo .
-         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" stop mobile-demo 2>$null
-         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" rm mobile-demo 2>$null
-         & "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" run -d --name mobile-demo -p 8081:80 mobile-app-demo
+          "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" build -t mobile-app-demo .
+          "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" stop mobile-demo 2>nul || exit 0
+          "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" rm mobile-demo 2>nul || exit 0
+          "C:\Users\avaiza.shahid\AppData\Local\Programs\DockerDesktop\resources\bin\docker.exe" run -d --name mobile-demo -p 8081:80 mobile-app-demo
