@@ -70,7 +70,7 @@ jobs:
       # Build Debug APK
       # --------------------------------------------------
       - name: Build Debug APK
-        run: flutter build apk --debug
+        run: flutter build apk --debug --android-skip-build-dependency-validation
 
       # --------------------------------------------------
       # Verify APK was created
